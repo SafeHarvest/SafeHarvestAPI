@@ -3,6 +3,9 @@ require 'securerandom'
 
 class UsersController < ApplicationController
 
+  USER_HKEY = 'user'
+  USER_ID_HKEY = 'user-id'
+
   skip_before_filter :verify_authenticity_token, :only => [:create]
 
   # "profile": {"username": "jerrydantonio", "auth": "twitter", "other": "keys", "and": "values"}
@@ -15,15 +18,15 @@ class UsersController < ApplicationController
       render :json => "username #{username} already exists", :status => :bad_request
     else
       id = SecureRandom.uuid
-      REDIS.set("user-id:#{username}", id)
-      REDIS.set("user:#{id}", profile)
+      REDIS.hset(USER_ID_HKEY, username, id)
+      REDIS.hset(USER_HKEY, id, profile)
       render :json => {'id' => id}
     end
   end
 
   def show
     id = params['id']
-    user = REDIS.get("user:#{id}")
+    user = REDIS.hget(USER_HKEY, id)
     if user
       render :json => user
     else

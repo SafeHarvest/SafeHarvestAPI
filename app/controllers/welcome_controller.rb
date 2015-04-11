@@ -7,7 +7,7 @@ class WelcomeController < ApplicationController
   def index
     id = SecureRandom.uuid
     message = "#{Faker::Company.catch_phrase} to #{Faker::Company.bs}."
-    REDIS.set("message:#{id}", message)
+    REDIS.hset('message', id, message)
     render :json => {'id' => id, 'message' => message}
   end
 end
