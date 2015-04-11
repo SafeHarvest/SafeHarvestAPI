@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   USER_HKEY = 'user'
   USER_ID_HKEY = 'user-id'
 
-  skip_before_filter :verify_authenticity_token, :only => [:create]
+  skip_before_filter :verify_authenticity_token
 
   # "profile": {"username": "jerrydantonio", "auth": "twitter", "other": "keys", "and": "values"}
   def create

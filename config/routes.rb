@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   get 'welcome', to: 'welcome#index'
   resources :users, :only => [:show, :create]
+  resources :crops, :only => [:index]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -5,6 +5,10 @@ require File.expand_path('../config/application', __FILE__)
 
 Rails.application.load_tasks
 
+Dir.glob('tasks/**/*.rake').each do |rakefile|
+  load rakefile
+end
+
 desc 'Copy static assets from the front-end project'
 task :front do
   sh 'cp -r ../MainApp/IonicUpdated/www/ public/'
