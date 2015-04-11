@@ -12,8 +12,8 @@ end
 desc 'Copy static assets from the front-end project'
 task :front do
   ionicdir = '../MainApp/IonicUpdated'
-  sh "cd #{ionicdir} && ionic platform add ios && ionic build ios"
-  sh "cp -r #{ionicdir}/platforms/ios/www public"
+  sh "cd #{ionicdir} && ionic platform add browser && ionic build browser"
+  sh "cp -r #{ionicdir}/platforms/browser/www/ public"
   sh 'git add public'
   sh 'git commit -m "Updated front-end assets."'
 end
