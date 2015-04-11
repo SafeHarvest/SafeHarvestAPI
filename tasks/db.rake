@@ -29,6 +29,26 @@ namespace :db do
     mappings.each {|type, crop| REDIS.sadd("crop-type: #{type}", crop) }
   end
 
+  task 'seed:pests' do
+    #crops = Set.new
+    pests = []
+    mappings = []
+
+    CSV.foreach(File.join(File.dirname(__FILE__), '..', 'db/crop_pest.csv')) do |row|
+      crop = row.first.strip.titleize
+      pest = row.last.strip.titleize
+
+      #crops.add(crop)
+      pests << pest
+      mappings << [crop, pest]
+      p [crop, pest]
+    end
+
+    #types.each {|type| REDIS.sadd('crop-types', type) }
+    pests.each {|pest| REDIS.sadd('pests', pest) }
+    mappings.each {|crop, pest| REDIS.sadd("crop-pest: #{crop}", pest) }
+  end
+
   desc 'Seed the database'
-  task :seed => [ 'seed:crops', 'seed:seasons' ]
+  task :seed => [ 'seed:crops', 'seed:seasons', 'seed:pests' ]
 end
