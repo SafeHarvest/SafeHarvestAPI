@@ -4,6 +4,8 @@ class WelcomeController < ApplicationController
 
   # GET /welcome
   def index
-    render :json => {'message' => "#{Faker::Company.catch_phrase} to #{Faker::Company.bs}."}
+    message = "#{Faker::Company.catch_phrase} to #{Faker::Company.bs}."
+    REDIS.set(:message, message)
+    render :json => {'message' => message}
   end
 end

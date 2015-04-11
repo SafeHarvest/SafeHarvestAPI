@@ -12,6 +12,8 @@ require 'sprockets/railtie'
 
 require 'redis'
 
+REDIS = Redis.new(:url => ENV['REDISTOGO_URL'])
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
