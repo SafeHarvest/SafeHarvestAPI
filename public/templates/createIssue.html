@@ -1,5 +1,45 @@
 <ion-view view-title="Issues">
   <ion-content>
     <h1>Issues</h1>
+ <div class="list">
+
+  
+   <label class="item item-input">
+     <span class="input-label">Issue</span>
+     <input class = type="text">
+   </label>
+   
+   <label class="item item-input">
+     <span class="input-label">CropType</span>
+	 <select ng-options="item.subItem as item.label for item in values track by item.id" ng-model="selected">
+   </label>
+  
+   <label class="item item-input">
+     <span class="input-label">Description</span>
+     <textbox></textbox>
+   </label>
+  
+   <label class="item item-input">
+     <span class="input-label">Stage</span>
+     <textarea></textarea>
+   </label>
+  
+   <label class="item item-input">
+     <span class="input-label">Symptoms</span>
+     <textarea></textarea>
+   </label>
+  
+   <label class="item item-input">
+     <span class="input-label">How to Care</span>
+     <textarea></textarea>
+   </label>
+  
+		<button class="button button-stable" ng-click="report()">
+		  report
+		</button>
+		<button class="button button-stable" ng-click="cancel()">
+		  cancel
+		</button>
+ </div>
   </ion-content>
 </ion-view>

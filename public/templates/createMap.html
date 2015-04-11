@@ -34,7 +34,8 @@
 		</button>
 		
 		</br> 
-  		 <leaflet center="center" markers="markers" layers="layers"></leaflet>
+  		 <!--<leaflet center="center" markers="markers" layers="layers"></leaflet>-->
+		 <map-dir>error</map-dir>
 		 
 		 <div class="list">
 			 
@@ -45,12 +46,12 @@
 		   
 		   <label class="item item-input">
 		     <span class="input-label">Crop Season</span>
-		     <input type="password">
+		     <input type="text">
 		   </label>
 		   
 		   <label class="item item-input">
 		     <span class="input-label">Acers Affected</span>
-		     <input type="password">
+		     <input type="text">
 		   </label>
 		   
 		   <label class="item item-input">
@@ -75,7 +76,7 @@
 		   
 		   <label class="item item-input">
 		     <span class="input-label">How to Care</span>
-		     <textbox></textbox>
+		     <textarea></textarea>
 		   </label>
 		   
    		<button class="button button-stable" ng-click="report()">

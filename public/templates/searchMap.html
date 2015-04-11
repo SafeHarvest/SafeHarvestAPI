@@ -1,19 +1,91 @@
       
 	  <ion-view view-title="SearchMap">
 	    <ion-content>
-		 <h1 class="title">SearchMap</h1>
-	      <!--<h1>Playlist</h1>
-		  	  <view title="'Map'" left-buttons="leftButtons" right-buttons="rightButtons">
-		          <content has-header="true" has-footer="false" scroll="false">
-		            <div id="map">
-
-		            </div>
-          
-		          </content>
-		        <div class="bar bar-footer bar-dark">
-		            <a ng-click="centerOnMe()" class="button button-icon icon ion-navigate">Find Me</a>
-		          </div>-->
-		        </view>
+		<div ng-controller="SearchMapCtrl">
+	  		<div class="row">
+				<div class="list .col-50">
+	  			  <label class="item item-input">
+	  			      <span class="input-label">Lat</span>
+	  			      <input ng-model="lat" ng-change="changeLat(lat)" type="text">
+	  			   </label>
+	  			</div>
+			
+	  			<div class="list  .col-50">
+	  			  <label class="item item-input">
+	  			      <span class="input-label">Long</span>
+	  			      <input ng-model="long" ng-change="changeLong(long)" type="text">
+	  			   </label>
+	  			</div>
+	  		</div><!--row-->
+		
+		
+	  		 <div class="list">
+	  			 <label class="item item-input">
+	  				 <span class="input-label">Address</span>
+	  			     <input ng-model="address" ng-change="changeAddress(address)" type="text">
+	  			 </label>
+	  		 </div>
+		 
+		
+	  		<button class="button button-stable" ng-click="geoLocate()">
+	  		  Geo Locate
+	  		</button>
+		
+	  		</br> 
+	    	<map-dir data="">error</map-dir>
+		 
+	  		 <div class="list">
+			 
+	  		   <label class="item item-input">
+	  		     <span class="input-label">CropType</span>
+	  			 <select ng-options="item.subItem as item.label for item in values track by item.id" ng-model="selected">
+	  		   </label>
+		   
+	  		   <label class="item item-input">
+	  		     <span class="input-label">Crop Season</span>
+	  		     <input type="password">
+	  		   </label>
+		   
+	  		   <label class="item item-input">
+	  		     <span class="input-label">Acers Affected</span>
+	  		     <input type="password">
+	  		   </label>
+		   
+	  		   <label class="item item-input">
+	  		     <span class="input-label">Issue</span>
+	  		     <select ng-options="item.subItem as item.label for item in values track by item.id" ng-model="selected">
+	  		   </label>
+		   
+	  		   <label class="item item-input">
+	  		     <span class="input-label">Description</span>
+	  		     <textbox></textbox>
+	  		   </label>
+		   
+	  		   <label class="item item-input">
+	  		     <span class="input-label">Stage</span>
+	  		     <textarea></textarea>
+	  		   </label>
+		   
+	  		   <label class="item item-input">
+	  		     <span class="input-label">Symptoms</span>
+	  		     <textarea></textarea>
+	  		   </label>
+		   
+	  		   <label class="item item-input">
+	  		     <span class="input-label">How to Care</span>
+	  		     <textarea></textarea>
+	  		   </label>
+		   
+	     		<button class="button button-stable" ng-click="report()">
+	     		  report
+	     		</button>
+	     		<button class="button button-stable" ng-click="cancel()">
+	     		  cancel
+	     		</button>
+	  		 </div>
+		 </div>
+	</div><!--controller-->
+		      
 	    </ion-content>
 	  </ion-view>
 	 
