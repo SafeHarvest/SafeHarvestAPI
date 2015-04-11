@@ -1,6 +1,6 @@
 angular.module('createmap.controllers', [])
 .controller("CreateMapCtrl", [ "$scope",'$http','dataService', 'leafletData', function($scope,$http,dataService, leafletData) {
-
+	
 	angular.extend($scope, {
         center: {
             lat: 38.857,
@@ -45,12 +45,12 @@ angular.module('createmap.controllers', [])
         new testObject(41.483, -81.662, 'object3', L.marker([]))
         ];
 
-        // function onMarkerClick(e){
-        //     var marker = e.target;
-        //     var latlng = marker.getLatLng();
-        //     $scope.lat = latlng.lat;
-        //     $scope.lng = latlng.lng;
-        // }
+         function onMarkerClick(e){
+            var marker = e.target;
+            var latlng = marker.getLatLng();
+            $scope.lat = latlng.lat;
+             $scope.lng = latlng.lng;
+        }
 
         function addMarkerToMap(testObjects){
             for(var i = 0; i < testObjects.length; i++){
@@ -83,21 +83,21 @@ angular.module('createmap.controllers', [])
             marker.setLatLng(e.latlng)
             .addTo(map);
 
-            $scope.lat = e.latlng.lat.toFixed(4);
-            $scope.lng = e.latlng.lng.toFixed(4);
+            $scope.data.lat = e.latlng.lat.toFixed(4);
+            $scope.data.lng = e.latlng.lng.toFixed(4);
         }
 
 
 
 
-        map.on("click", onMapClickMarker);
-        addMarkerToMap(testObjects);
-    });
-
-        //marker.on('drag', onDragMarker);
-       // map.on("click", onMapClickAddMarker);
+        //map.on("click", onMapClickMarker);
         //addMarkerToMap(testObjects);
-    //})
+   // });
+
+        marker.on('drag', onDragMarker);
+        map.on("click", onMapClickAddMarker);
+        addMarkerToMap(testObjects);
+    })
 
 
     // Simple POST request example (passing data) :
