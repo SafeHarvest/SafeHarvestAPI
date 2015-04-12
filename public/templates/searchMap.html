@@ -1,8 +1,8 @@
-      
-	  <ion-view view-title="SearchMap">
-	    <ion-content  data-tap-disabled="true">
+<ion-view view-title="SearchMap">
+	 <ion-content  data-tap-disabled="true">
 		<div ng-controller="SearchMapCtrl">
 		
+			<ion-radio ng-model="local.data" ng-change="onSearch()" ng-value="'other'">Other</ion-radio>
 			<ion-radio ng-model="local.data" ng-change="onSearch()" ng-value="'Crop'">Crop</ion-radio>
 			<ion-radio ng-model="local.data" ng-change="onSearch()" ng-value="'insect'">Insect</ion-radio>
 			<ion-radio ng-model="local.data" ng-change="onSearch()" ng-value="'location'">location</ion-radio>
@@ -14,7 +14,7 @@
 	  		</br> 
 	    	<map-dir data="" markers="local.markers"  map-id="'search'">error</map-dir>
 		 
-	  		<div class="list">
+	  	  <div class="list">
  	  		<div class="row">
  				<div class="list .col-50">
  	  			  <label class="item item-input">
@@ -53,22 +53,22 @@
 		   
 			   <label class="item item-input">
 			     <span class="input-label">Description</span>
-			     <textbox ng-model=local.pest.description></textbox>
+			     <textbox ng-model="local.pest.description"></textbox>
 			   </label>
 		   
 			   <label class="item item-input">
 			     <span class="input-label">Stage</span>
-			     <textarea ng-model=local.pest.destuctiveStage></textarea>
+			     <textarea ng-model="local.pest.destuctiveStage"></textarea>
 			   </label>
 		   
 			   <label class="item item-input">
 			     <span class="input-label">Symptoms</span>
-			     <textarea ng-model=local.pest.symptoms></textarea>
+			     <textarea ng-model="local.pest.symptoms"></textarea>
 			   </label>
 		   
 			   <label class="item item-input">
 			     <span class="input-label">How to Care</span>
-			     <textarea  ng-model=local.pest.care></textarea>
+			     <textarea  ng-model="local.pest.care"></textarea>
 			   </label>
 		   
 	     		<button class="button button-stable" ng-click="save()">
@@ -78,9 +78,9 @@
 	     		  cancel
 	     		</button>
 	  		 </div>
-		 </div>
+		
 	</div><!--controller-->
 		      
-	    </ion-content>
-	  </ion-view>
+	</ion-content>
+</ion-view>
 	 
