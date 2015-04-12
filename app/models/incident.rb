@@ -1,12 +1,12 @@
 class Incident < ActiveRecord::Base
-	belongs_to :crop
-	belongs_to :pest
-	
-	def self.deep_get_array
-	#seasons = Season.all.collect{|season| season.attributes}
-    Incident.all.includes(:pests).collect do |crop|
-      crop.attributes.merge!(
-		:pests => crop.pests.collect{|pest| pest.attributes })
+  belongs_to :crop
+  belongs_to :pest
+
+  def self.deep_get_array
+    Incident.all.includes(:pest, :crop).collect do |incident|
+      incident.attributes.merge!(
+        :pest => incident.pest.attributes,
+        :crop => incident.crop.attributes)
     end
   end
 end

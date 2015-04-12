@@ -22,34 +22,32 @@ CSV.foreach(File.join(File.dirname(__FILE__), 'crop_seed.csv')) do |row|
   c = Crop.new
   c.family = family
   c.name = crop
-  
   c.save
-  
-  
 end
 
 CSV.foreach(File.join(File.dirname(__FILE__), 'crop_pest.csv'),{:col_sep => ":"}) do |row|
-      crop = row.first.strip.titleize
-      pest = row.last
-	  pest.gsub!("\\", "\"")
-	  pest.gsub!(/\s*=>/, ":")
-puts "!!!! #{pest}"
-	  
-	  pest = JSON.parse(pest)
-	  p = Pest.new(pest)
-	  p.crop = Crop.find_by_name(crop)
-	  p.save!
-	  
+  crop = row.first.strip.titleize
+  pest = row.last
+  pest.gsub!("\\", "\"")
+  pest.gsub!(/\s*=>/, ":")
+
+  begin
+    pest = JSON.parse(pest)
+    p = Pest.new(pest)
+    p.crop = Crop.find_by_name(crop)
+    p.save
+  rescue
+    # keep on moving on...
+  end
 end
 
 pest_ids = Pest.where(:crop_id => 6).collect{|pest| pest.id}
-
 100.times do
-	incident = Incident.create(
-		:latitude => rand + 41,
-		:longitude => -1 * (rand + 81),
-		:crop_id => 6,
-		:pest_id => pest_ids[rand(pest_ids.size)]
-	)
-	p incident
+  incident = Incident.create(
+    :latitude => rand + 41,
+    :longitude => -1 * (rand + 81),
+    :crop_id => 6,
+    :pest_id => pest_ids[rand(pest_ids.size)]
+  )
+  p incident
 end

@@ -4,11 +4,11 @@ class Crop < ActiveRecord::Base
   has_many :incidents
 
   def self.deep_get_array
-	seasons = Season.all.collect{|season| season.attributes}
+    seasons = Season.all.collect{|season| season.attributes}
     Crop.all.includes(:pests).collect do |crop|
       crop.attributes.merge!(
-		:pests => crop.pests.collect{|pest| pest.attributes },
-		:seasons => seasons)
+        :pests => crop.pests.collect{|pest| pest.attributes },
+        :seasons => seasons)
     end
   end
 end
