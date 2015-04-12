@@ -5,3 +5,9 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+['Spring', 'Summer', 'Winter', 'Fall'].each_with_index do |season|
+  s = Season.new
+  s.name = season
+  s.save
+end

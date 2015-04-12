@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150412140246) do
+ActiveRecord::Schema.define(version: 20150412142935) do
 
   create_table "incidents", force: :cascade do |t|
     t.float    "latitude"
@@ -21,6 +21,10 @@ ActiveRecord::Schema.define(version: 20150412140246) do
     t.integer  "pest_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "seasons", force: :cascade do |t|
+    t.string "name"
   end
 
 end
