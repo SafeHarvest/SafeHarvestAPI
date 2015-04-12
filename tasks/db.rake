@@ -65,5 +65,5 @@ namespace :db do
   end
 
   desc 'Seed the database'
-  task :seed => [ 'seed:crops', 'seed:seasons', 'seed:pests' ]
+  task :seed => [ 'seed:crops', 'seed:seasons', 'seed:pests', 'seed:pestdetail' ]
 end
