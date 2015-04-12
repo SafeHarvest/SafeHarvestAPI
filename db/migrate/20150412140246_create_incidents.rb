@@ -6,7 +6,6 @@ class CreateIncidents < ActiveRecord::Migration
       t.integer :user_id
       t.integer :crop_id
       t.integer :pest_id
-
       t.timestamps
     end
   end

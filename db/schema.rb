@@ -11,7 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150412144755) do
+ActiveRecord::Schema.define(version: 20150412151108) do
+
+  create_table "crops", force: :cascade do |t|
+    t.string "family"
+    t.string "name"
+  end
 
   create_table "incidents", force: :cascade do |t|
     t.float    "latitude"
@@ -21,6 +26,16 @@ ActiveRecord::Schema.define(version: 20150412144755) do
     t.integer  "pest_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "pests", force: :cascade do |t|
+    t.string  "name"
+    t.string  "description"
+    t.string  "symptoms"
+    t.string  "care"
+    t.string  "destructiveStage"
+    t.string  "photourl"
+    t.integer "crop_id"
   end
 
   create_table "seasons", force: :cascade do |t|

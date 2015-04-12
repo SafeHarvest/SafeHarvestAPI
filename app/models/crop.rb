@@ -1,0 +1,4 @@
+class Crop < ActiveRecord::Base
+	validates :name, uniqueness: true
+	has_many :pests
+end
