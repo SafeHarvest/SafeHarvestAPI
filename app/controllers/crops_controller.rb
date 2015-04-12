@@ -24,21 +24,8 @@ class CropsController < ApplicationController
 		
 	#}
 	
-	#foreach crop, add pest and season, return JSON
-	retObjs = Hash.new
-	seasons = Season.all
 	
-	Crop.all.each{|c|
-		retObjs[c => name] = {c, seasons}
-		#add season
-		
-		#add pest
-		
-
-	}
-	
-	
-	render :json => retObjs.to_json
+	render :json => Crop.deep_get_array.to_json
 	
   end
 
