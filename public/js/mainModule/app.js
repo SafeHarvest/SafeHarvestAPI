@@ -15,6 +15,7 @@ var app = angular.module('starter', ['ionic',
 'profile.controllers',
 'maps.directives',
 'reports.controllers',
+'map.controllers',
 'data.service'
 ])
 

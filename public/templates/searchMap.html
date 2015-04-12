@@ -1,6 +1,6 @@
       
 	  <ion-view view-title="SearchMap">
-	    <ion-content>
+	    <ion-content  data-tap-disabled="true">
 		<div ng-controller="SearchMapCtrl">
 	  		<div class="row">
 				<div class="list .col-50">
@@ -18,21 +18,19 @@
 	  			</div>
 	  		</div><!--row-->
 		
-		
 	  		 <div class="list">
 	  			 <label class="item item-input">
 	  				 <span class="input-label">Address</span>
 	  			     <input ng-model="address" ng-change="changeAddress(address)" type="text">
 	  			 </label>
 	  		 </div>
-		 
 		
 	  		<button class="button button-stable" ng-click="geoLocate()">
 	  		  Geo Locate
 	  		</button>
 		
 	  		</br> 
-	    	<map-dir data="">error</map-dir>
+	    	<map-dir data=""  map-id="'search'">error</map-dir>
 		 
 	  		 <div class="list">
 			 

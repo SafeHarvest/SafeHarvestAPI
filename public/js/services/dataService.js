@@ -3,7 +3,7 @@ angular.module('data.service', [])
     var _getData = function(){
 		var deferred = $q.defer();
 		
-	  	$http.get('https://rocky-badlands-6969.herokuapp.com/').then(function(data,status,headers,config) {
+	  	$http.get('https://rocky-badlands-6969.herokuapp.com/crops').then(function(data,status,headers,config) {
 			deferred.resolve(data);
 	  	  }, function(err) {
 	  	    //console.error('ERR', err);

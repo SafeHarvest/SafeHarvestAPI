@@ -1,5 +1,5 @@
 <ion-view view-title="Maps">
-  <ion-content>
+  <ion-content  data-tap-disabled="true">
 		<div ng-controller="CreateMapCtrl">
 			
 		
@@ -8,14 +8,14 @@
 			<div class="list .col-50">
 			  <label class="item item-input">
 			      <span class="input-label">Lat</span>
-			      <input ng-model="lat" ng-change="changeLat(lat)" type="text">
+			      <input ng-model="local.data.lat" ng-change="changeLat(local.data.lat)" type="text">
 			   </label>
 			</div>
 			
 			<div class="list  .col-50">
 			  <label class="item item-input">
 			      <span class="input-label">Long</span>
-			      <input ng-model="lng" ng-change="changeLong(lng)" type="text">
+			      <input ng-model="local.data.lng" ng-change="changeLong(local.data.lng)" type="text">
 			   </label>
 			</div>
 		</div><!--row-->
@@ -24,7 +24,7 @@
 		 <div class="list">
 			 <label class="item item-input">
 				 <span class="input-label">Address</span>
-			     <input ng-model="address" ng-change="changeAddress(address)" type="text">
+			     <input ng-model="local.data.address" ng-change="changeAddress(address)" type="text">
 			 </label>
 		 </div>
 		 
@@ -33,25 +33,33 @@
 		  Geo Locate
 		</button>
 		
+		
 		</br> 
   		 <!--<leaflet center="center" markers="markers" layers="layers"></leaflet>-->
-		 <map-dir>error</map-dir>
+		 
+		 <map-dir map-id="'create'" data='local.data'>error</map-dir>
 		 
 		 <div class="list">
 			 
 		   <label class="item item-input">
-		     <span class="input-label">CropType</span>
+		     <span class="input-label">Crop</span>
 			 <select ng-options="item.subItem as item.label for item in values track by item.id" ng-model="selected">
+		   </label>
+		   
+		   
+		   <label class="item item-input">
+		     <span class="input-label">Season</span>
+		     <select ng-options="item.subItem as item.label for item in values track by item.id" ng-model="selected">
 		   </label>
 		   
 		   <label class="item item-input">
 		     <span class="input-label">Crop Season</span>
-		     <input type="text">
+		     <input type="text"/>
 		   </label>
 		   
 		   <label class="item item-input">
 		     <span class="input-label">Acers Affected</span>
-		     <input type="text">
+		     <input type="text"/>
 		   </label>
 		   
 		   <label class="item item-input">
