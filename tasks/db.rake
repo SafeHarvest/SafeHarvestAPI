@@ -34,16 +34,17 @@ namespace :db do
     pests = []
     mappings = []
 
-    CSV.foreach(File.join(File.dirname(__FILE__), '..', 'db/crop_pest.csv')) do |row|
+    CSV.foreach(File.join(File.dirname(__FILE__), '..', 'db/crop_pest.csv'),{:col_sep => ":"}) do |row|
       crop = row.first.strip.titleize
-      pest = row.last.strip.titleize
+      pest = row.last
+	  pest = pest.gsub("\\", "\"")
 
-      pests << pest
+      #pests << pest
       mappings << [crop, pest]
       p [crop, pest]
     end
 
-    pests.each {|pest| REDIS.sadd('pests', pest) }
+    #pests.each {|pest| REDIS.sadd('pests', pest) }
     mappings.each {|crop, pest| REDIS.sadd("crop-pest: #{crop}", pest) }
   end
   
@@ -64,6 +65,24 @@ namespace :db do
     mappings.each {|pest, detail| REDIS.hset("pest-detail", pest, detail) }
   end
 
+   task 'seed:users' do
+   users = []
+	mappings =[]
+
+    CSV.foreach(File.join(File.dirname(__FILE__), '..', 'db/user_seed.csv'), {:col_sep => ":"}) do |row|
+      #pest = row.first.strip.titleize
+      detail = row.first
+	  detail = detail.gsub("\\", "\"")
+	  profile = JSON.parse(detail)
+	  p profile
+	  #username = profile['Email']
+      #mappings << [user, detail]
+      #p [user, detail]
+	
+    end
+
+    mappings.each {|pest, detail| REDIS.hset("pest-detail", pest, detail) }
+  end
   desc 'Seed the database'
-  task :seed => [ 'seed:crops', 'seed:seasons', 'seed:pests', 'seed:pestdetail' ]
+  task :seed => [ 'seed:crops', 'seed:seasons', 'seed:pests' ]
 end
