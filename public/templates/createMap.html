@@ -40,60 +40,51 @@
 		 <map-dir map-id="'create'" data='local.data'>error</map-dir>
 		 
 		 <div class="list">
-			 
+			  
 		   <label class="item item-input">
 		     <span class="input-label">Crop</span>
-			 <select ng-options="item.subItem as item.label for item in values track by item.id" ng-model="selected">
+			 <select ng-options="key for (key , value) in local.data.crops" ng-model="local.crop"></select>
 		   </label>
 		   
 		   
 		   <label class="item item-input">
 		     <span class="input-label">Season</span>
-		     <select ng-options="item.subItem as item.label for item in values track by item.id" ng-model="selected">
+			 <select ng-options="item for (key,item) in local.crop.seasons" ng-model="local.season"></select>
 		   </label>
 		   
 		   <label class="item item-input">
-		     <span class="input-label">Crop Season</span>
-		     <input type="text"/>
-		   </label>
-		   
-		   <label class="item item-input">
-		     <span class="input-label">Acers Affected</span>
-		     <input type="text"/>
-		   </label>
-		   
-		   <label class="item item-input">
-		     <span class="input-label">Issue</span>
-		     <select ng-options="item.subItem as item.label for item in values track by item.id" ng-model="selected">
+		     <span class="input-label">Pest</span>
+			 {{local.crop.pests}}
+			 <select ng-options="value.name for item in local.crop.pests" ng-model="local.pest"></select>
 		   </label>
 		   
 		   <label class="item item-input">
 		     <span class="input-label">Description</span>
-		     <textbox></textbox>
+		     <textbox ng-model=local.pest.description></textbox>
 		   </label>
 		   
 		   <label class="item item-input">
 		     <span class="input-label">Stage</span>
-		     <textarea></textarea>
+		     <textarea ng-model=local.pest.destuctiveStage></textarea>
 		   </label>
 		   
 		   <label class="item item-input">
 		     <span class="input-label">Symptoms</span>
-		     <textarea></textarea>
+		     <textarea ng-model=local.pest.symptoms></textarea>
 		   </label>
 		   
 		   <label class="item item-input">
 		     <span class="input-label">How to Care</span>
-		     <textarea></textarea>
+		     <textarea  ng-model=local.pest.care></textarea>
 		   </label>
 		   
-   		<button class="button button-stable" ng-click="report()">
-   		  report
-   		</button>
-   		<button class="button button-stable" ng-click="cancel()">
-   		  cancel
-   		</button>
-		 </div>
+   			<button class="button button-stable" ng-click="report()">
+   		  	  report
+   			</button>
+   			<button class="button button-stable" ng-click="cancel()">
+   		  	  cancel
+   			</button>
+		</div>
 		
 	</div>
   </ion-content>

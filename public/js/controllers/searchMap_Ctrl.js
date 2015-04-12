@@ -26,4 +26,5 @@ angular.module('searchMap.controllers',[])
   	$scope.geoLocate = function(){
 		alert("geoLocate");
   	}
+
 }]);

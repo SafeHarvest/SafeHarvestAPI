@@ -16,7 +16,10 @@ angular.module('createmap.controllers', [])
 
 	$scope.selected = { name: 'aSubItem' };
 	
-	dataService.getData();
+	dataService.getCropData().then(function(data){
+		$scope.local.data.crops= data.data;
+	});
+	
 	
   	$scope.changeLat = function(lat){
 		$timeout(function(){

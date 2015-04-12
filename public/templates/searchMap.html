@@ -2,80 +2,77 @@
 	  <ion-view view-title="SearchMap">
 	    <ion-content  data-tap-disabled="true">
 		<div ng-controller="SearchMapCtrl">
-	  		<div class="row">
-				<div class="list .col-50">
-	  			  <label class="item item-input">
-	  			      <span class="input-label">Lat</span>
-	  			      <input ng-model="lat" ng-change="changeLat(lat)" type="text">
-	  			   </label>
-	  			</div>
+		
+			<ion-radio ng-model="local.data" ng-change="onSearch()" ng-value="'Crop'">Crop</ion-radio>
+			<ion-radio ng-model="local.data" ng-change="onSearch()" ng-value="'insect'">Insect</ion-radio>
+			<ion-radio ng-model="local.data" ng-change="onSearch()" ng-value="'location'">location</ion-radio>
 			
-	  			<div class="list  .col-50">
-	  			  <label class="item item-input">
-	  			      <span class="input-label">Long</span>
-	  			      <input ng-model="long" ng-change="changeLong(long)" type="text">
-	  			   </label>
-	  			</div>
-	  		</div><!--row-->
-		
-	  		 <div class="list">
-	  			 <label class="item item-input">
-	  				 <span class="input-label">Address</span>
-	  			     <input ng-model="address" ng-change="changeAddress(address)" type="text">
-	  			 </label>
-	  		 </div>
-		
 	  		<button class="button button-stable" ng-click="geoLocate()">
 	  		  Geo Locate
 	  		</button>
 		
 	  		</br> 
-	    	<map-dir data=""  map-id="'search'">error</map-dir>
+	    	<map-dir data="" markers="local.markers"  map-id="'search'">error</map-dir>
 		 
-	  		 <div class="list">
-			 
+	  		<div class="list">
+ 	  		<div class="row">
+ 				<div class="list .col-50">
+ 	  			  <label class="item item-input">
+ 	  			      <span class="input-label">Lat</span>
+ 	  			      <input ng-model="lat" ng-change="changeLat(lat)" type="text" ng-disable="true">
+ 	  			   </label>
+ 	  			</div>
+			
+ 	  			<div class="list  .col-50">
+ 	  			  <label class="item item-input">
+ 	  			      <span class="input-label">Long</span>
+ 	  			      <input ng-model="long" ng-change="changeLong(long)" type="text" ng-disable="true">
+ 	  			   </label>
+ 	  			</div>
+ 	  		</div><!--row-->
+			
 	  		   <label class="item item-input">
 	  		     <span class="input-label">CropType</span>
-	  			 <select ng-options="item.subItem as item.label for item in values track by item.id" ng-model="selected">
+	  			<input ng-model="lat" ng-change="changeLat(lat)" type="text" ng-disable="true">
 	  		   </label>
 		   
 	  		   <label class="item item-input">
 	  		     <span class="input-label">Crop Season</span>
-	  		     <input type="password">
+	  		     <input ng-model="lat" ng-change="changeLat(lat)" type="text" ng-disable="true">
 	  		   </label>
 		   
 	  		   <label class="item item-input">
 	  		     <span class="input-label">Acers Affected</span>
-	  		     <input type="password">
+	  		     <input ng-model="lat" ng-change="changeLat(lat)" type="text" ng-disable="true">
 	  		   </label>
 		   
 	  		   <label class="item item-input">
 	  		     <span class="input-label">Issue</span>
-	  		     <select ng-options="item.subItem as item.label for item in values track by item.id" ng-model="selected">
-	  		   </label>
+	  		     <input ng-model="lat" ng-change="changeLat(lat)" type="text" ng-disable="true">
+			 </label>
 		   
-	  		   <label class="item item-input">
-	  		     <span class="input-label">Description</span>
-	  		     <textbox></textbox>
-	  		   </label>
+			   <label class="item item-input">
+			     <span class="input-label">Description</span>
+			     <textbox ng-model=local.pest.description></textbox>
+			   </label>
 		   
-	  		   <label class="item item-input">
-	  		     <span class="input-label">Stage</span>
-	  		     <textarea></textarea>
-	  		   </label>
+			   <label class="item item-input">
+			     <span class="input-label">Stage</span>
+			     <textarea ng-model=local.pest.destuctiveStage></textarea>
+			   </label>
 		   
-	  		   <label class="item item-input">
-	  		     <span class="input-label">Symptoms</span>
-	  		     <textarea></textarea>
-	  		   </label>
+			   <label class="item item-input">
+			     <span class="input-label">Symptoms</span>
+			     <textarea ng-model=local.pest.symptoms></textarea>
+			   </label>
 		   
-	  		   <label class="item item-input">
-	  		     <span class="input-label">How to Care</span>
-	  		     <textarea></textarea>
-	  		   </label>
+			   <label class="item item-input">
+			     <span class="input-label">How to Care</span>
+			     <textarea  ng-model=local.pest.care></textarea>
+			   </label>
 		   
-	     		<button class="button button-stable" ng-click="report()">
-	     		  report
+	     		<button class="button button-stable" ng-click="save()">
+	     		  Save 
 	     		</button>
 	     		<button class="button button-stable" ng-click="cancel()">
 	     		  cancel

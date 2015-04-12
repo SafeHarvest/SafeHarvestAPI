@@ -1,5 +1,5 @@
 angular.module('map.controllers', [])
-.controller("MapCtrl", [ "$scope",'$http','dataService', 'leafletData', function($scope,$http,dataService, leafletData) {
+.controller("MapCtrl", [ "$scope",'$http','dataService', 'leafletData','leafletEvents', 'leafletBoundsHelpers', function($scope,$http,dataService, leafletData,leafletEvents, leafletBoundsHelpers) {
 	
 	angular.extend($scope, {
 		center: {
@@ -8,10 +8,20 @@ angular.module('map.controllers', [])
 			zoom: 2
 		},
 		events: {
-		    map: {
-		      enable: ['dblclick', 'drag', 'blur', 'touchstart'],
-		      logic: 'emit'
-		   }
+			map: {
+				disable: leafletEvents.getAvailableMapEvents(),
+				enable: ['dblclick', 'drag', 'blur', 'touchstart', 'click'],
+				logic: 'emit'
+			},
+			marker: {
+				disable: leafletEvents.getAvailableMapEvents(),
+				enable: ['click'],
+				logic: 'emit'
+			}
+		},
+
+		markers : { 
+			enable: ['dblclick', 'drag', 'blur', 'touchstart']
 		},
 		
 		layers: {
@@ -34,80 +44,80 @@ angular.module('map.controllers', [])
 		}
 	});
 	
-if($scope.mapId==="create"){
-	
-	$scope.$on('leafletDirectiveMap.dblclick', function(event, args){
-		$scope.markers=[];
-		var marker = event.target;
-		var latlng = args.leafletEvent.latlng;
-		$scope.data.lat = latlng.lat;
-		$scope.data.lng = latlng.lng;
-		
-		$scope.markers.push({
-			lat: latlng.lat,
-			lng: latlng.lng,
-		    message: "A Message"
-		});
-	});
-	
-	/*$scope.$watchCollection('[data.lat,data.lng]', function(data) {
-		if(angular.isDefined(data[0]) && angular.isDefined(data[1])){
+	if($scope.mapId==="create"){
+
+		$scope.$on('leafletDirectiveMap.click', function(event, args){
 			$scope.markers=[];
-		
+			var marker = event.target;
+			var latlng = args.leafletEvent.latlng;
+			$scope.data.lat = latlng.lat;
+			$scope.data.lng = latlng.lng;
+
 			$scope.markers.push({
-				lat: data[0],
-				lng: data[1],
-		    	message: "A Message"
+				lat: latlng.lat,
+				lng: latlng.lng,
+				message: "A Message"
 			});
-			
-			$scope.center={
-				lat: data[0],
-				lng: data[1],
-				zoom: 8
-			}
-		}
-	},true);*/
-	
-	$scope.$on("addMarker",function(event,data){
+		});
+
+		$scope.$on("addMarker",function(event,data){
 			if(angular.isDefined(data.lat) && angular.isDefined(data.lng)){
 				$scope.markers=[];
-		
+
 				$scope.markers.push({
-					lat: data.lat,
-					lng: data.lng,
+					lat: parseFloat(data.lat),
+					lng: parseFloat(data.lng),
 			    	message: "A Message"
 				});
-			
+
 				$scope.center={
-					lat: data.lat,
-					lng: data.lng,
+					lat: parseFloat(data.lat),
+					lng: parseFloat(data.lng),
 					zoom: 8
 				}
 			}
 
-		
+
 		});
-}else{
-	
-	$scope.$on('leafletDirectiveMap.load', function(event, args){
-		$scope.markers=[];
-		for(var i = 0 ; i<100; i++){
-			$scope.markers.push({
-				lat: 42+i,
-				lng: 81+i,
-	    		message: "A Message"
+	}else{
+
+		$scope.$on('leafletDirectiveMap.load', function(event, args){
+
+			function marker(lat, lng, incidentId){
+				this.lat = lat;
+				this.lng = lng;
+				this.incidentId = incidentId;
+			}
+
+			var bounds = args.leafletEvent.target.getBounds();
+
+			$scope.markers=[];
+
+			var mapData;
+
+			dataService.getMapData(bounds._northEast.lat, bounds._southWest.lat, bounds._northEast.lng, bounds._southWest.lng)
+			.then(function(data){
+				mapData = data;
 			});
-		}
-	
-		$scope.center={
-			lat: 42,
-			lng: 81,
-			zoom: 2
-		}
-	});
-	
-	
-}
+
+			for(var i = 0; i < mapData.length; i++){
+				var marker = new marker(parseFloat(mapData[i].lat), parseFLoat(mapData[i].lng), mapData[i].incidentId);
+				$scope.markers.push(marker);
+			}
+
+			$scope.center={
+				lat: 42,
+				lng: 81,
+				zoom: 2
+			}
+		});
+
+		$scope.$on('leafletDirectiveMarker.click', function(event, args){
+
+		})
+
+
+	}
 	
 	/*$scope.$on('leafletDirectiveMap.click', function(event){
 		_addMarkerToMap();
@@ -123,13 +133,13 @@ if($scope.mapId==="create"){
 	error(function(data, status, headers, config) {
 	// called asynchronously if an error occurs
 	// or server returns response with an error status.
-	});*/
+});*/
 	/*$http.get('http://echo.jsontest.com/conditions/frightful').then(function(resp) {
 		$scope.conditions = resp.data.conditions;
 		}, function(err) {
 		console.error('ERR', err);
 		// err.status will contain the status code
-		})*/
+	})*/
 
 		/*var promise = dataService.getData();
 		promise.then(function(result) {
@@ -139,6 +149,6 @@ if($scope.mapId==="create"){
 		//alert('Failed: ' + reason);
 		}, function(update) {
 		//alert('Got notification: ' + update);
-		});*/
+	});*/
 
-	}])
+}])
