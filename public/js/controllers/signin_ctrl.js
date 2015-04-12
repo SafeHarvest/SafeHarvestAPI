@@ -5,7 +5,7 @@ angular.module('signin.controllers', [])
 	
     console.log('Sign-In', user);
 	$timeout(function(){
-    	$state.go('app.menu');
+    	$state.go('app.createmap');
 	},1000);
   };
   
