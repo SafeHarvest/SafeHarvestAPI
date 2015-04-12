@@ -40,12 +40,16 @@ puts "!!!! #{pest}"
 	  p.crop = Crop.find_by_name(crop)
 	  p.save!
 	  
+end
 
-      ##pests << pest
-      #mappings << [crop, pest]
-      #p [crop, pest]
-    #end
+pest_ids = Pest.where(:crop_id => 6).collect{|pest| pest.id}
 
-    ##pests.each {|pest| REDIS.sadd('pests', pest) }
-    #mappings.each {|crop, pest| REDIS.sadd("crop-pest: #{crop}", pest) }
+100.times do
+	incident = Incident.create(
+		:latitude => rand + 41,
+		:longitude => -1 * (rand + 81),
+		:crop_id => 6,
+		:pest_id => pest_ids[rand(pest_ids.size)]
+	)
+	p incident
 end
