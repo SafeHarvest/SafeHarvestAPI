@@ -13,6 +13,6 @@ class IncidentsController < ApplicationController
   def index
     #render :nothing => true, :status => :not_found
 	
-	render :json => Incident.all.to_json
+	render :json => Incident.deep_get_array
   end
 end
