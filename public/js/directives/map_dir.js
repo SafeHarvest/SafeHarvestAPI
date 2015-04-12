@@ -4,7 +4,6 @@ angular.module('maps.directives', [])
     restrict: 'E',
     scope: {
       data: '=',
-      markers:'=',
 	  mapId:'='
     },
     link: function(scope, element, attrs, controllers) {

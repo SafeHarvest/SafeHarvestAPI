@@ -67,7 +67,7 @@ angular.module('map.controllers', [])
 				$scope.markers.push({
 					lat: parseFloat(data.lat),
 					lng: parseFloat(data.lng),
-			    	message: "A Message"
+					message: "A Message"
 				});
 
 				$scope.center={
@@ -100,10 +100,16 @@ angular.module('map.controllers', [])
 				mapData = data;
 			});
 
-			for(var i = 0; i < mapData.length; i++){
-				var marker = new marker(parseFloat(mapData[i].lat), parseFLoat(mapData[i].lng), mapData[i].incidentId);
-				$scope.markers.push(marker);
+			if(mapData){
+				for(var i = 0; i < mapData.length; i++){
+					var marker = new marker(parseFloat(mapData[i].lat), parseFLoat(mapData[i].lng), mapData[i].incidentId);
+					$scope.markers.push({
+						lat: parseFloat(marker.lat),
+						lng: parseFloat(marker.lng)
+					});
+				}
 			}
+			
 
 			$scope.center={
 				lat: 42,

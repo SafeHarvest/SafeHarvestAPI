@@ -2,7 +2,7 @@
 	 <ion-content  data-tap-disabled="true">
 		<div ng-controller="SearchMapCtrl">
 		
-			<ion-radio ng-model="local.data" ng-change="onSearch()" ng-value="'other'">Other</ion-radio>
+			<!--<ion-radio ng-model="local.data" ng-change="onSearch()" ng-value="'other'">Other</ion-radio>-->
 			<ion-radio ng-model="local.data" ng-change="onSearch()" ng-value="'Crop'">Crop</ion-radio>
 			<ion-radio ng-model="local.data" ng-change="onSearch()" ng-value="'insect'">Insect</ion-radio>
 			<ion-radio ng-model="local.data" ng-change="onSearch()" ng-value="'location'">location</ion-radio>
@@ -12,7 +12,7 @@
 	  		</button>
 		
 	  		</br> 
-	    	<map-dir data="" markers="local.markers"  map-id="'search'">error</map-dir>
+	      <map-dir data="local.data"   map-id="'search'" >error</map-dir>
 		 
 	  	  <div class="list">
  	  		<div class="row">
@@ -79,7 +79,7 @@
 	     		</button>
 	  		 </div>
 		
-	</div><!--controller-->
+		 </div><!--controller-->
 		      
 	</ion-content>
 </ion-view>

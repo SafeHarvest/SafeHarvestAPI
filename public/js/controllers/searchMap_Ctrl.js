@@ -1,6 +1,7 @@
 angular.module('searchMap.controllers',[])
 .controller('SearchMapCtrl',[ "$scope",'$http','dataService', function($scope,$http,dataService)  {
-		
+	$scope.local={};
+	$scope.local.data={lat:0,lng:0};
 	$scope.values = [{
 	  id: 1,
 	  label: 'aLabel',
