@@ -19,14 +19,14 @@ class UsersController < ApplicationController
       u.profile = profile
       u.save!
     end
-  rescue => ActiveRecord::RecordInvalid
+  rescue ActiveRecord::RecordInvalid
     render :json => "username #{username} already exists", :status => :bad_request
   end
 
   def show
     user = User.find(params['id'])
     render :json => user.to_json
-  rescue => ActiveRecord::RecordNotFound
+  rescue ActiveRecord::RecordNotFound
     render :nothing => true, :status => :not_found
   end
 end
