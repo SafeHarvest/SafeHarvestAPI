@@ -11,11 +11,12 @@ end
 
 desc 'Copy static assets from the front-end project'
 task :front do
-  ionicdir = '../MainApp/IonicUpdated'
-  #sh "cd #{ionicdir} && git fetch && git pull origin master"
+  projectdir = '../MainApp'
+  ionicdir = "#{projectdir}/IonicUpdated"
+  #sh "cd #{projectdir} && git fetch && git pull origin master"
   sh "cd #{ionicdir} && ionic platform add browser && ionic build browser"
   sh "cp -r #{ionicdir}/platforms/browser/www/ public"
-  #sh "cd #{ionicdir} && git add platforms && git commit -m 'Built for platforms'"
+  #sh "cd #{projectdir} && git add platforms && git commit -m 'Built for platforms'"
   sh 'git add public && git status'
   sh 'git commit -m "Updated front-end assets."'
 end
