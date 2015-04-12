@@ -1,4 +1,5 @@
 require 'csv'
+require 'json'
 
 namespace :db do
 
@@ -30,7 +31,6 @@ namespace :db do
   end
 
   task 'seed:pests' do
-    #crops = Set.new
     pests = []
     mappings = []
 
@@ -38,15 +38,30 @@ namespace :db do
       crop = row.first.strip.titleize
       pest = row.last.strip.titleize
 
-      #crops.add(crop)
       pests << pest
       mappings << [crop, pest]
       p [crop, pest]
     end
 
-    #types.each {|type| REDIS.sadd('crop-types', type) }
     pests.each {|pest| REDIS.sadd('pests', pest) }
     mappings.each {|crop, pest| REDIS.sadd("crop-pest: #{crop}", pest) }
+  end
+  
+  task 'seed:pestdetail' do
+    pests = []
+	mappings =[]
+
+    CSV.foreach(File.join(File.dirname(__FILE__), '..', 'db/pest_detail.csv'), {:col_sep => ":"}) do |row|
+      pest = row.first.strip.titleize
+      detail = row.last
+	  detail = detail.gsub("\\", "\"")
+	
+      mappings << [pest, detail]
+      p [pest, detail]
+	
+    end
+
+    mappings.each {|pest, detail| REDIS.hset("pest-detail", pest, detail) }
   end
 
   desc 'Seed the database'
